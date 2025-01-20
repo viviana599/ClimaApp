@@ -13,11 +13,9 @@ import com.example.miapp.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentFirstBinding? = null    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var comunicator: FragmentComunicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +23,12 @@ class FirstFragment : Fragment() {
     ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
+        comunicator = requireActivity() as FragmentComunicator
+        binding.menuButton.setOnClickListener {
+            comunicator.magnagelouder(isVisible = true)
+        }
 
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
